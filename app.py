@@ -21,14 +21,13 @@ def main():
 
     # Page title
     st.markdown("# Data Analysis Project\n\n"
-                "Version: April 26, 2024\n")
+                "Version: April 26, 2024\n\n"
+                "Developing a data analytics program that uses players' statistics to provide insights for the national team of Romania prior to the European Championship this summer")
     
     # First section - Dataset
     st.markdown("## Dataset\n\n"
                 "The dataset used in this project is one that we've created using collected data publicly available on the internet.\n\n"
-                "It contains information about the players that are expected to play at the EURO 2024 competition.\n\n"
-                "Developing a data analytics program that uses players' statistics to provide insights and recommendations for national team coaches and managers prior to the European Championship this summer")
-    
+                "It contains information about the players that are expected to play at the EURO 2024 competition.\n\n")    
     # Import the dataset
     df = pd.read_csv('dataset.csv')
 
