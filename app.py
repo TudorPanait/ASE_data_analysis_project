@@ -17,7 +17,7 @@ def main():
                     "Tudor-Alexandru PANAIT\n\n"
                     "Andrei-Florin VREMĂROIU\n\n")
         
-        st.link_button(url="https://github.com/TudorPanait", label="See GitHub Repository")
+        st.link_button(url="https://github.com/TudorPanait/ASE_data_analysis_project", label="See GitHub Repository")
 
     # Page title
     st.markdown("# Data Analysis Project\n\n"
@@ -46,7 +46,37 @@ def main():
     sns.histplot(df['Age'], bins=20, kde=False)
     plt.title('Age Distribution of Players')
     st.pyplot(plt)
+
+    # Comparison of Youth Team Country and Senior Debut Country
+    fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(20, 10))
+    sns.countplot(y='Youth Team Country', data=df, ax=axes[0])
+    axes[0].set_title('Youth Team Country')
+    sns.countplot(y='Senior Debut Country', data=df, ax=axes[1])
+    axes[1].set_title('Senior Debut Country')
+    plt.tight_layout()
+    st.pyplot(fig)
+
+    # Club League Distribution of Players
+    league_counts = df['Club league'].value_counts()
     
+    # Get the value counts of 'Youth Team Country' and 'Senior Debut Country'
+    youth_team_counts = df['Youth Team Country'].value_counts()
+    senior_debut_counts = df['Senior Debut Country'].value_counts()
+
+    # Create a subplot with 2 columns
+    fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(20, 10))
+
+    # Create a pie chart for 'Youth Team Country'
+    axes[0].pie(youth_team_counts, labels=youth_team_counts.index, autopct='%1.1f%%')
+    axes[0].set_title('Youth Team Country')
+
+    # Create a pie chart for 'Senior Debut Country'
+    axes[1].pie(senior_debut_counts, labels=senior_debut_counts.index, autopct='%1.1f%%')
+    axes[1].set_title('Senior Debut Country')
+
+    # Display the plot
+    plt.tight_layout()
+    st.pyplot(fig)
     col1, col2 = st.columns(2)
 
     with col1: 
@@ -99,6 +129,13 @@ def main():
         plt.axvline(df['Goals scored'].median(), color='blue', linestyle='--')  # Median line for Goals scored
         plt.title('Goals Scored vs. Selections')
         st.pyplot(plt)
+
+    # Initialize connection.
+    conn = st.connection('mysql', type='sql')
+
+    # Perform query.
+    df = conn.query('SELECT * from dataset;', ttl=0)
+    st.dataframe(df)
     
 if __name__ == "__main__":
     main()
