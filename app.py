@@ -26,7 +26,8 @@ def main():
     # First section - Dataset
     st.markdown("## Dataset\n\n"
                 "The dataset used in this project is one that we've created using collected data publicly available on the internet.\n\n"
-                "It contains information about the players that are expected to play at the EURO 2024 competition.\n\n")
+                "It contains information about the players that are expected to play at the EURO 2024 competition.\n\n"
+                "Developing a data analytics program that uses players' statistics to provide insights and recommendations for national team coaches and managers prior to the European Championship this summer")
     
     # Import the dataset
     df = pd.read_csv('dataset.csv')
@@ -129,13 +130,6 @@ def main():
         plt.axvline(df['Goals scored'].median(), color='blue', linestyle='--')  # Median line for Goals scored
         plt.title('Goals Scored vs. Selections')
         st.pyplot(plt)
-
-    # Initialize connection.
-    conn = st.connection('mysql', type='sql')
-
-    # Perform query.
-    df = conn.query('SELECT * from dataset;', ttl=0)
-    st.dataframe(df)
     
 if __name__ == "__main__":
     main()
