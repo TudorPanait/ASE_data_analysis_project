@@ -4,3 +4,4 @@ seaborn==0.13.2
 streamlit==1.32.2
 mysqlclient==2.2.4
 SQLAlchemy==2.0.29
+Flask-SQLAlchemy==3.1.1
